@@ -3,6 +3,15 @@ import React, { useState, useEffect } from "react";
 // Covert rgb to hex string
 import rgbToHex from "./utils";
 
+// react icons
+import { FaCheck } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
+
+// Animation
+import { alertAnimate } from "./animation";
+import { clipboardAnimate } from "./animation";
+import { motion } from "framer-motion";
+
 const SingleColor = ({ rgb, weight, index, hexColor }) => {
   // States
   const [alert, setAlert] = useState(false);
@@ -13,31 +22,57 @@ const SingleColor = ({ rgb, weight, index, hexColor }) => {
   //   Using from function above as we defined already
   const hex = rgbToHex(...rgb);
 
-  const hexValue = `#${hexColor}`;
+  let hexValue = `#${hexColor}`;
 
   //   To disapear the alert after a seconds
   useEffect(() => {
     const timeout = setTimeout(() => {
       setAlert(false);
-    }, 2000);
+    }, 3000);
     return () => {
       clearTimeout(timeout);
     };
   }, [alert]);
 
+  if (alert) {
+    hexValue = null;
+  }
+
   return (
-    <article
-      className={`color ${index > 10 && "color-light"} `}
-      style={{ backgroundColor: `rgb(${bcg})` }}
-      onClick={() => {
-        setAlert(true);
-        navigator.clipboard.writeText(hexValue);
-      }}
-    >
-      <p className="percent-value">{weight}%</p>
-      <p className="color-value">{hexValue}</p>
-      {alert && <p className="alert">copied to clipboard</p>}
-    </article>
+    <>
+      <article
+        className={`color ${index > 10 && "color-light"} `}
+        style={{ backgroundColor: `rgb(${bcg})` }}
+        onClick={() => {
+          setAlert(true);
+          navigator.clipboard.writeText(hexValue);
+        }}
+      >
+        <p className="percent-value">{weight}%</p>
+        <p className="color-value">{hexValue}</p>
+        {alert && (
+          <>
+            <motion.p
+              variants={alertAnimate}
+              initial="hidden"
+              animate="show"
+              className={`alert ${index > 10 && "color-light"}`}
+            >
+              <FaCheck className="check" />
+            </motion.p>
+            <motion.p
+              variants={clipboardAnimate}
+              initial="hidden"
+              animate="show"
+              className="clipboard"
+            >
+              <FaCheckCircle className="check-icon" />
+              <span>Color copied to the clipboard!</span>
+            </motion.p>
+          </>
+        )}
+      </article>
+    </>
   );
 };
 

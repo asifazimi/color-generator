@@ -11,7 +11,7 @@ Variables
   --clr-primary-3: hsl(205, 72%, 37%);
   --clr-primary-4: hsl(205, 63%, 48%);
   /* primary/main color */
-  --clr-primary-5: hsl(205, 78%, 60%);
+  --clr-primary-5: hsl(205, 65%, 55%);
   /* lighter shades of primary color */
   --clr-primary-6: hsl(205, 89%, 70%);
   --clr-primary-7: hsl(205, 90%, 76%);
@@ -160,6 +160,12 @@ input {
   border-top-left-radius: var(--radius);
   border-bottom-left-radius: var(--radius);
 }
+
+input:focus {
+  outline: 1.5px solid var(--clr-primary-5);
+  padding: 0.45rem 1rem;
+}
+
 .btn {
   background: var(--clr-primary-5);
   padding: 0.5rem 1rem;
@@ -170,18 +176,36 @@ input {
   text-transform: capitalize;
   color: var(--clr-white);
   cursor: pointer;
+  outline: 1.3px solid var(--clr-primary-5);
 }
+
 @media screen and (max-width: 576px) {
+  .container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+
   .container h3 {
     font-size: 1rem;
+    margin-bottom: 1rem;
   }
+
   input,
   .btn {
     font-size: 0.85rem;
   }
+
+  .color {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
 }
 input.error {
-  border: 2px solid var(--clr-red-dark) !important;
+  outline: 1.5px solid var(--clr-red-dark) !important;
+  padding: 0.45rem 1rem;
 }
 .colors {
   min-height: calc(100vh - 100px);
@@ -212,6 +236,40 @@ input.error {
 
 .alert {
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 1rem;
   margin-top: 0.5rem;
+  color: black;
+}
+
+.color-light .alert {
+  color: #fff;
+}
+
+.clipboard {
+  color: white;
+  background: black;
+  position: fixed;
+  bottom: 2rem;
+  right: 0;
+  left: 0;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin: 0 auto;
+  padding: 12px 0;
+  border-radius: 60px;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.check-icon {
+  margin-right: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.check {
+  font-size: 1.2em;
 }
