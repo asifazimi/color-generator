@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-
 // Covert rgb to hex string
 import rgbToHex from "./utils";
-
 // react icons
 import { FaCheck } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
-
 // Animation
 import { alertAnimate } from "./animation";
 import { clipboardAnimate } from "./animation";
